@@ -22,9 +22,9 @@ def test_get_api_key_for_valid_user(email=valid_email, password=valid_password):
 #тест 2
 def test_get_all_pets_with_valid_key(filter=''):
     """ Проверяем что запрос всех питомцев возвращает не пустой список.
-    Для этого сначала получаем api ключ и сохраняем в переменную auth_key. Далее используя этого ключ
-    запрашиваем список всех питомцев и проверяем что список не пустой.
-    Доступное значение параметра filter - 'my_pets' либо '' """
+    Для этого сначала получаем api ключ и сохраняем в переменную auth_key. 
+    Далее используя этого ключ запрашиваем список всех питомцев и проверяем
+    что список не пустой. Доступное значение параметра filter - 'my_pets' либо '' """
 
     _, auth_key = pf.get_api_key(valid_email, valid_password)
     status, result = pf.get_list_of_pets(auth_key, filter)
@@ -34,8 +34,7 @@ def test_get_all_pets_with_valid_key(filter=''):
 
 
 #тест 3
-def test_add_new_pet_with_valid_data(name='Барбоскин1', animal_type='двортерьер',
-                                     age='4', pet_photo='images/cat1.jpg'):
+def test_add_new_pet_with_valid_data(name='Барбоскин1', animal_type='двортерьер', age='4', pet_photo='images/cat1.jpg'):
     """Проверяем что можно добавить питомца с корректными данными"""
 
     # Получаем полный путь изображения питомца и сохраняем в переменную pet_photo
@@ -53,8 +52,7 @@ def test_add_new_pet_with_valid_data(name='Барбоскин1', animal_type='д
 
 
 #тест 4
-def test_add_new_pet_simple(name='Клепа', animal_type='Некот',
-                                     age='2'):
+def test_add_new_pet_simple(name='Клепа', animal_type='Некот', age='2'):
     """Проверяем что можно добавить питомца без фото"""
 
     # Запрашиваем ключ api и сохраняем в переменую auth_key
