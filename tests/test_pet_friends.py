@@ -134,5 +134,17 @@ def test_successful_delete_self_pet():
     assert pet_id not in my_pets.values()
 
 
+#тест 1 мои
+def test_get_api_key_for_not_valid_user(email=valid_email, password=not_valid_password):
+    """ Проверяем что запрос api ключа возвращает статус 200 и в тезультате содержится слово key"""
+
+    # Отправляем запрос и сохраняем полученный ответ с кодом статуса в status, а текст ответа в result
+    status, result = pf.get_api_key(email, password)
+
+    # Сверяем полученные данные с нашими ожиданиями
+    assert status == 404
+    assert 'key' in result
+
+
 
 
