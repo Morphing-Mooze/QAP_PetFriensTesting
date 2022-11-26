@@ -134,9 +134,9 @@ def test_successful_delete_self_pet():
     assert pet_id not in my_pets.values()
 
 
-#тест 1 мои
+#тест 1 мой
 def test_get_api_key_for_not_valid_user(email=valid_email, password=not_valid_password):
-    """ Проверяем что запрос api ключа возвращает статус 200 и в тезультате содержится слово key"""
+    """ Проверяем что нельзя пройти валидацию с неправильным паролем"""
 
     # Отправляем запрос и сохраняем полученный ответ с кодом статуса в status, а текст ответа в result
     status, result = pf.get_api_key(email, password)
@@ -144,6 +144,26 @@ def test_get_api_key_for_not_valid_user(email=valid_email, password=not_valid_pa
     # Сверяем полученные данные с нашими ожиданиями
     assert status == 404
     assert 'key' in result
+
+
+#тест 2 мой
+def test_add_new_pet_with_not_valid_data(name='111111111111111111111', animal_type='99999999999999', age='-999999999999', pet_photo='images/cat1.jpg'):
+    """Проверяем что можно добавить питомца с некорректными данными"""
+
+    # Получаем полный путь изображения питомца и сохраняем в переменную pet_photo
+    pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
+
+    # Запрашиваем ключ api и сохраняем в переменую auth_key
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+
+    # Добавляем питомца
+    status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
+
+    # Сверяем полученный ответ с ожидаемым результатом
+    assert status == 200
+    assert result['name'] == name
+
+
 
 
 
