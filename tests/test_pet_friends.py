@@ -31,7 +31,7 @@ def test_get_all_pets_with_valid_key(filter=''):
     assert len(result['pets']) > 0
 
 
-def test_add_new_pet_with_valid_data(name='Барбоскин', animal_type='двортерьер',
+def test_add_new_pet_with_valid_data(name='Барбоскин1', animal_type='двортерьер',
                                      age='4', pet_photo='images/cat1.jpg'):
     """Проверяем что можно добавить питомца с корректными данными"""
 
@@ -47,6 +47,37 @@ def test_add_new_pet_with_valid_data(name='Барбоскин', animal_type='д�
     # Сверяем полученный ответ с ожидаемым результатом
     assert status == 200
     assert result['name'] == name
+
+def test_add_new_pet_simple(name='Клепа', animal_type='Некот',
+                                     age='2'):
+    """Проверяем что можно добавить питомца без фото"""
+
+    # Запрашиваем ключ api и сохраняем в переменую auth_key
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+
+    # Добавляем питомца
+    status, result = pf.add_new_pet(auth_key, name, animal_type, age)
+
+    # Сверяем полученный ответ с ожидаемым результатом
+    assert status == 200
+    assert result['name'] == name
+
+def test_add_set_photo(auth_key, pet_id, pet_photo):
+    """Проверяем что можно добавить питомца с корректными данными"""
+
+    # Получаем полный путь изображения питомца и сохраняем в переменную pet_photo
+    pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
+
+    # Запрашиваем ключ api и сохраняем в переменую auth_key
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+
+    # Добавляем питомца
+    status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
+
+    # Сверяем полученный ответ с ожидаемым результатом
+    assert status == 200
+    assert result['name'] == name
+
 
 def test_successful_update_self_pet_info(name='Мурзик', animal_type='Котэ', age=5):
     """Проверяем возможность обновления информации о питомце"""
