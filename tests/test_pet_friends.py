@@ -7,6 +7,7 @@ import os
 pf = PetFriends()
 
 
+#тест 1
 def test_get_api_key_for_valid_user(email=valid_email, password=valid_password):
     """ Проверяем что запрос api ключа возвращает статус 200 и в тезультате содержится слово key"""
 
@@ -18,6 +19,7 @@ def test_get_api_key_for_valid_user(email=valid_email, password=valid_password):
     assert 'key' in result
 
 
+#тест 2
 def test_get_all_pets_with_valid_key(filter=''):
     """ Проверяем что запрос всех питомцев возвращает не пустой список.
     Для этого сначала получаем api ключ и сохраняем в переменную auth_key. Далее используя этого ключ
@@ -31,6 +33,7 @@ def test_get_all_pets_with_valid_key(filter=''):
     assert len(result['pets']) > 0
 
 
+#тест 3
 def test_add_new_pet_with_valid_data(name='Барбоскин1', animal_type='двортерьер',
                                      age='4', pet_photo='images/cat1.jpg'):
     """Проверяем что можно добавить питомца с корректными данными"""
@@ -48,6 +51,8 @@ def test_add_new_pet_with_valid_data(name='Барбоскин1', animal_type='д
     assert status == 200
     assert result['name'] == name
 
+
+#тест 4
 def test_add_new_pet_simple(name='Клепа', animal_type='Некот',
                                      age='2'):
     """Проверяем что можно добавить питомца без фото"""
@@ -62,6 +67,8 @@ def test_add_new_pet_simple(name='Клепа', animal_type='Некот',
     assert status == 200
     assert result['name'] == name
 
+
+#тест 5
 def test_add_set_photo(auth_key, pet_id, pet_photo):
     """Проверяем что есть питомец с корректными данными"""
 
@@ -84,6 +91,7 @@ def test_add_set_photo(auth_key, pet_id, pet_photo):
         raise Exception("There is no my pets")
 
 
+#тест 6
 def test_successful_update_self_pet_info(name='Мурзик', animal_type='Котэ', age=5):
     """Проверяем возможность обновления информации о питомце"""
 
@@ -103,6 +111,7 @@ def test_successful_update_self_pet_info(name='Мурзик', animal_type='Ко�
         raise Exception("There is no my pets")
 
 
+#тест 7
 def test_successful_delete_self_pet():
     """Проверяем возможность удаления питомца"""
 
